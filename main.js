@@ -61,6 +61,7 @@
         }
     }
 
+
     // Collision detection for ball and bricks
     function collisionDetection() {
         for (var c = 0; c < brickColumnCount; c++) {
@@ -70,6 +71,10 @@
                     if (x > brick.x && x < brick.x + brickWidth && y > brick.y && y < brick.y + brickHeight) {
                         dy = -dy;
                         brick.status = 0;
+                        if (bricks.every(row => row.every(brick => brick.status === 0))) {
+                            alert("Congratulations! You win!");
+                            document.location.reload();
+                        }
                     }
                 }
             }
