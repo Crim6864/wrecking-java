@@ -1,39 +1,69 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Introduction
+Hello and welcome to my second project at Code Institute. This is a JavaScript based project.
 
-Welcome,
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+# Wrecking Ball Game
+### Project Description
+This project was made for fun and made me realise how much you can learn from google.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
 
-## Codeanywhere Reminders
+### Project Purpose.
+I created this project to better market ourselves and for future updates where we can register new members, take attendance and see the financials.
+Currently it aims to solve our marketing problem and make for a better communication with our audiance.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+# Features 
 
-`python3 -m http.server`
+A fully working Wrecking Ball Game.
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+## Future Features
+Right now the product is fully functional but there are many more features to be added in the future. 
 
-`http_server`
+1. More Game Modes and Levels
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+<hr>
 
-To log into the Heroku toolbelt CLI:
+#### Validator Testing 
+JSHINT
+-Metrics
+-There are 11 functions in this file.
+-Function with the largest signature take 1 arguments, while the median is 0.
+-Largest function has 21 statements in it, while the median is 5.
+-The most complex function has a cyclomatic complexity value of 12 while the median is 1.
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+-Two warnings
+-85	'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
 
----
 
-Happy coding!
+
+## Deployment
+
+Deployed to Github Pages, the following steps can be found under this comment. 
+
+- The site was deployed to GitHub pages. The steps to deploy are as follows: 
+  - In the GitHub repository, navigate to the Settings tab 
+  - From the source section drop-down menu, select the Main Branch
+  - Once the main branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment. 
+
+The live link can be found here - https://code-institute-org.github.io/love-running-2.0/index.html 
+
+
+## Credits 
+
+Google api for understanding my seaches.
+Code Institute for all the content.
+My Friends who answered all my stupid questions.
+
+#### Content 
+
+- The text where transfered from our old website.
+- The README organisation credit goes to [BezeBee](https://github.com/bezebee/My-First-Project/blob/main/README.md)
+
+| Tutorial Title      | Creator/Channel Name | Description                                          |
+|---------------------|-----------------------|------------------------------------------------------|
+| [Tutorial Love Running Project](https://code-institute-org.github.io/love-running-2.0/index.html) | Code Institute | Helped me remember how to do things in git     |
+
+- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
