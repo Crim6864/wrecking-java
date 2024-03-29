@@ -8,8 +8,7 @@ This project was made for fun and made me realise how much you can learn from go
 
 
 ### Project Purpose.
-I created this project to better market ourselves and for future updates where we can register new members, take attendance and see the financials.
-Currently it aims to solve our marketing problem and make for a better communication with our audiance.
+To make a game everyone can enjoy!
 
 # Features 
 
