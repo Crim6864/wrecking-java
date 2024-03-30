@@ -112,7 +112,6 @@ function drawWalls() {
     ctx.lineTo(canvas.width, 0); // Top-right corner
     ctx.lineTo(canvas.width, canvas.height); // Bottom-right corner
     ctx.lineTo(0, canvas.height); // Bottom-left corner
-    ctx.closePath();
     ctx.strokeStyle = '#0095DD';
     ctx.stroke();
 }
@@ -184,10 +183,10 @@ function update() {
     drawLives();
     collisionDetection();
     paddleCollisionDetection();
+    wallCollisionDetection();
     updatePaddlePosition();
     x += dx;
     y += dy;
-    wallCollisionDetection(); // Check for wall collision after updating ball position
 
     requestAnimationFrame(update);
 }
