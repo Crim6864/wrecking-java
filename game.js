@@ -79,15 +79,24 @@ function paddleCollisionDetection() {
 // Wall Collision Detection
 function wallCollisionDetection() {
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-        dx = -dx;
+        dx = -dx; // Reverse horizontal direction if hitting left or right wall
     }
     if (y + dy < ballRadius) {
-        dy = -dy;
+        dy = -dy; // Reverse vertical direction if hitting top wall
     }
     if (y + dy > canvas.height - ballRadius) {
-        dy = -dy;
+        // Check if hitting bottom wall
+        if (x > paddleX && x < paddleX + paddleWidth) {
+            // Check if ball is within paddle's width
+            dy = -dy; // Reverse vertical direction if hitting paddle
+        } else {
+            // Ball hits the bottom wall, game over
+            alert('Game Over');
+            document.location.reload();
+        }
     }
 }
+
 
 // Update Game
 function update() {
