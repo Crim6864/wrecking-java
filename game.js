@@ -132,8 +132,6 @@ function drawWalls() {
     ctx.stroke();
 }
 
-
-
 // Wall Collision Detection
 function wallCollisionDetection() {
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
@@ -151,6 +149,51 @@ function updatePaddlePosition() {
     } else if (leftPressed && paddleX > 0) {
         paddleX -= 7;
     }
+}
+
+// Start Button Event Listener
+document.getElementById('easyButton').addEventListener('click', function() {
+    startGame('easy');
+});
+
+document.getElementById('mediumButton').addEventListener('click', function() {
+    startGame('medium');
+});
+
+document.getElementById('hardButton').addEventListener('click', function() {
+    startGame('hard');
+});
+
+function startGame(difficulty) {
+    // Set game parameters based on difficulty
+    if (difficulty === 'easy') {
+        // Set parameters for easy difficulty
+        // For example:
+        dx = 2;
+        dy = -2;
+    } else if (difficulty === 'medium') {
+        // Set parameters for medium difficulty
+        // For example:
+        dx = 3;
+        dy = -3;
+    } else if (difficulty === 'hard') {
+        // Set parameters for hard difficulty
+        // For example:
+        dx = 4;
+        dy = -4;
+    }
+
+    // Initialize game elements and start the game
+    // For example:
+    resetGame();
+    update();
+}
+
+function resetGame() {
+    // Reset game elements to initial state
+    // For example:
+    lives = 3;
+    // Reset bricks, paddle, ball positions, etc.
 }
 
 // Event Listeners
