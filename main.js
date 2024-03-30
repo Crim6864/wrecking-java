@@ -32,22 +32,35 @@ var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
-// Set canvas size based on viewport dimensions
-function setCanvasSize() {
-    canvas.width = Math.min(window.innerWidth * 0.9, 480); // 90% of the viewport width or maximum of 480px
-    canvas.height = Math.min(window.innerHeight * 0.9, 320); // 90% of the viewport height or maximum of 320px
+// Create bricks
+var bricks = [];
+function createBricks() {
+    for (var c = 0; c < brickColumnCount; c++) {
+        bricks[c] = [];
+        for (var r = 0; r < brickRowCount; r++) {
+            bricks[c][r] = { x: 0, y: 0, status: 1 };
+        }
+    }
 }
 
-// Call setCanvasSize initially and when the window is resized
-setCanvasSize();
-window.addEventListener('resize', setCanvasSize);
-
-// Event listeners for paddle control
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-canvas.addEventListener("touchstart", touchStartHandler, false);
-canvas.addEventListener("touchmove", touchMoveHandler, false);
-canvas.addEventListener("touchend", touchEndHandler, false);
+// Draw the bricks
+function drawBricks() {
+    for (var c = 0; c < brickColumnCount; c++) {
+        for (var r = 0; r < brickRowCount; r++) {
+            if (bricks[c][r].status == 1) {
+                var brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
+                var brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
+                bricks[c][r].x = brickX;
+                bricks[c][r].y = brickY;
+                ctx.beginPath();
+                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                ctx.fillStyle = "#0095DD";
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+    }
+}
 
 // Function to start the game with a delay
 function startGameWithDelay(selectedDifficulty) {
@@ -68,7 +81,7 @@ function startGameWithDelay(selectedDifficulty) {
 function startGame(selectedDifficulty) {
     difficulty = selectedDifficulty;
     setDifficulty(difficulty);
-    createBricks();
+    createBricks(); // Create bricks when starting the game
     gameStarted = true;
     draw();
 }
