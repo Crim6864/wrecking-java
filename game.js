@@ -154,23 +154,72 @@ function updatePaddlePosition() {
     }
 }
 
+// Event Listeners for Touch Controls
+canvas.addEventListener('touchstart', touchStartHandler, false);
+canvas.addEventListener('touchmove', touchMoveHandler, false);
+canvas.addEventListener('touchend', touchEndHandler, false);
+
+// Variables to track touch events
+let touchX = null;
+
+// Touch Start Handler
+function touchStartHandler(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    touchX = touch.clientX;
+}
+
+// Touch Move Handler
+function touchMoveHandler(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const relativeX = touch.clientX - canvas.offsetLeft;
+    if (relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth / 2;
+    }
+}
+
+// Touch End Handler
+function touchEndHandler(e) {
+    e.preventDefault();
+    touchX = null;
+}
+
+// Update Paddle Position for Touch Controls
+function updatePaddlePositionForTouch() {
+    if (touchX !== null) {
+        paddleX = touchX - paddleWidth / 2;
+    }
+}
+
 // Function to start the game
 function startGame(difficulty) {
     // Initialize bricks based on difficulty
     if (difficulty === 'easy') {
         brickRowCount = 3;
-        initBricks();
     } else if (difficulty === 'medium') {
         brickRowCount = 4;
-        initBricks();
     } else if (difficulty === 'hard') {
         brickRowCount = 5;
-        initBricks();
     }
 
     // Initialize game elements
+    initBricks();
     resetGame();
     gameStarted = true;
+    // Set ball speed based on difficulty only if the game has not started yet
+    if (!gameStarted) {
+        if (difficulty === 'easy') {
+            dx = 2;
+            dy = -2;
+        } else if (difficulty === 'medium') {
+            dx = 3;
+            dy = -3;
+        } else if (difficulty === 'hard') {
+            dx = 4;
+            dy = -4;
+        }
+    }
     update();
 }
 
@@ -195,7 +244,7 @@ function resetGame() {
     paddleX = (canvas.width - paddleWidth) / 2;
 }
 
-// Event Listeners
+// Event Listeners for Keyboard Controls
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
@@ -233,7 +282,7 @@ function drawPaddle() {
     ctx.closePath();
 }
 
-// Update Game
+// Update Game Loop
 function update() {
     if (!gameStarted) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -246,6 +295,7 @@ function update() {
     paddleCollisionDetection();
     wallCollisionDetection();
     updatePaddlePosition();
+    updatePaddlePositionForTouch(); // Update paddle position for touch controls
     x += dx;
     y += dy;
 
