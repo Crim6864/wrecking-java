@@ -34,6 +34,8 @@ var brickOffsetLeft = 30;
 
 // Create bricks
 var bricks = [];
+
+// Function to create bricks
 function createBricks() {
     for (var c = 0; c < brickColumnCount; c++) {
         bricks[c] = [];
@@ -43,7 +45,7 @@ function createBricks() {
     }
 }
 
-// Draw the bricks
+// Function to draw bricks
 function drawBricks() {
     for (var c = 0; c < brickColumnCount; c++) {
         for (var r = 0; r < brickRowCount; r++) {

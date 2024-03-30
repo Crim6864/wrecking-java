@@ -26,3 +26,10 @@ button {
         height: 320px;
     }
 }
+
+@media screen and (min-width: 1024px) {
+    canvas {
+        width: 800px;
+        height: 600px;
+    }
+}
