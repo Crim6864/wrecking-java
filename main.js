@@ -75,8 +75,10 @@ function startGameWithDelay(selectedDifficulty) {
     setTimeout(function() {
         document.body.removeChild(announcement); // Remove announcement
         startGame(selectedDifficulty); // Start the game
+        canvas.focus(); // Set focus to the canvas
     }, 5000); // Delay of 5 seconds
 }
+
 
 // Function to start the game
 function startGame(selectedDifficulty) {
