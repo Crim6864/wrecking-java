@@ -108,13 +108,41 @@ function drawLives() {
 // Draw Walls
 function drawWalls() {
     ctx.beginPath();
-    ctx.moveTo(0, 0); // Top-left corner
-    ctx.lineTo(canvas.width, 0); // Top-right corner
-    ctx.lineTo(canvas.width, canvas.height); // Bottom-right corner
-    ctx.lineTo(0, canvas.height); // Bottom-left corner
-    ctx.strokeStyle = '#0095DD';
+    
+    // Top wall
+    ctx.moveTo(0, 0);
+    ctx.lineTo(canvas.width, 0);
+    ctx.lineWidth = 5; // Thickness for top wall
+    ctx.strokeStyle = '#0095DD'; // Color for top wall
+    ctx.stroke();
+    
+    // Right wall
+    ctx.beginPath();
+    ctx.moveTo(canvas.width, 0);
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.lineWidth = 5; // Thickness for right wall
+    ctx.strokeStyle = '#0095DD'; // Color for right wall
+    ctx.stroke();
+    
+    // Bottom wall
+    ctx.beginPath();
+    ctx.moveTo(canvas.width, canvas.height);
+    ctx.lineTo(0, canvas.height);
+    ctx.lineWidth = 5; // Thickness for bottom wall
+    ctx.strokeStyle = '#0095DD'; // Color for bottom wall
+    ctx.stroke();
+    
+    // Left wall
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height);
+    ctx.lineTo(0, 0);
+    ctx.lineWidth = 5; // Thickness for left wall
+    ctx.strokeStyle = '#0095DD'; // Color for left wall
     ctx.stroke();
 }
+
+
+
 
 // Wall Collision Detection
 function wallCollisionDetection() {
