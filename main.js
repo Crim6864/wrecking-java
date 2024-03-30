@@ -183,7 +183,7 @@ function update() {
         dy = -dy;
     } else if (y + dy > canvas.height - ballRadius) {
         // Ball collision with paddle
-        if (x > paddleX && x < paddleX + paddleWidth) {
+        if (x > paddleX && x < paddleX + paddleWidth && y + dy > canvas.height - paddleHeight - ballRadius) {
             dy = -dy;
         } else {
             // Ball fell off the screen
