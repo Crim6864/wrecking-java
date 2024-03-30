@@ -65,13 +65,23 @@ function collisionDetection() {
 
 // Collision Detection with Paddle
 function paddleCollisionDetection() {
-    if (y + dy < ballRadius) {
-        dy = -dy;
-    } else if (y + dy > canvas.height - ballRadius - paddleHeight) {
+    if (y + dy > canvas.height - ballRadius - paddleHeight) {
+        // Check if hitting bottom wall
         if (x > paddleX && x < paddleX + paddleWidth) {
-            dy = -dy;
+            // Check if ball hits the top edge of the paddle
+            if (y + dy < canvas.height - paddleHeight + ballRadius) {
+                dy = -dy; // Reverse vertical direction if hitting top edge of paddle
+            } else {
+                // Calculate the angle of the bounce based on where the ball hits the paddle
+                const collidePoint = x - (paddleX + paddleWidth / 2);
+                const normalizedCollidePoint = collidePoint / (paddleWidth / 2);
+                const bounceAngle = normalizedCollidePoint * Math.PI / 3; // Adjust the bounce angle as needed
+                dx = ballRadius * Math.sin(bounceAngle);
+                dy = -ballRadius * Math.cos(bounceAngle);
+            }
         } else {
-            lives--; // Decrement lives if ball misses paddle
+            // Ball misses the paddle, lose a life
+            lives--;
             if (!lives) {
                 // No more lives, game over
                 alert('Game Over');
@@ -95,20 +105,35 @@ function drawLives() {
     ctx.fillText('Lives: ' + lives, canvas.width - 65, 20);
 }
 
-// Update Game
-function update() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBricks();
-    drawBall();
-    drawPaddle();
-    drawLives();
-    collisionDetection();
-    paddleCollisionDetection();
-    updatePaddlePosition();
-    x += dx;
-    y += dy;
+// Draw Walls
+function drawWalls() {
+    ctx.beginPath();
+    ctx.moveTo(0, 0); // Top-left corner
+    ctx.lineTo(canvas.width, 0); // Top-right corner
+    ctx.lineTo(canvas.width, canvas.height); // Bottom-right corner
+    ctx.lineTo(0, canvas.height); // Bottom-left corner
+    ctx.closePath();
+    ctx.strokeStyle = '#0095DD';
+    ctx.stroke();
+}
 
-    requestAnimationFrame(update);
+// Wall Collision Detection
+function wallCollisionDetection() {
+    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+        dx = -dx; // Reverse horizontal direction if hitting left or right wall
+    }
+    if (y + dy < ballRadius) {
+        dy = -dy; // Reverse vertical direction if hitting top wall
+    }
+}
+
+// Update Paddle Position
+function updatePaddlePosition() {
+    if (rightPressed && paddleX < canvas.width - paddleWidth) {
+        paddleX += 7;
+    } else if (leftPressed && paddleX > 0) {
+        paddleX -= 7;
+    }
 }
 
 // Event Listeners
@@ -149,13 +174,22 @@ function drawPaddle() {
     ctx.closePath();
 }
 
-// Update Paddle Position
-function updatePaddlePosition() {
-    if (rightPressed && paddleX < canvas.width - paddleWidth) {
-        paddleX += 7;
-    } else if (leftPressed && paddleX > 0) {
-        paddleX -= 7;
-    }
+// Update Game
+function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawWalls(); // Draw walls
+    drawBricks();
+    drawBall();
+    drawPaddle();
+    drawLives();
+    collisionDetection();
+    paddleCollisionDetection();
+    wallCollisionDetection();
+    updatePaddlePosition();
+    x += dx;
+    y += dy;
+
+    requestAnimationFrame(update);
 }
 
 update();
