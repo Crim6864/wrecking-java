@@ -7,12 +7,15 @@ h1, h2 {
     margin-bottom: 50px;
 }
 
-/* Board Styling */
+/* Add your custom styles here */
 canvas {
     border: 1px solid #000;
     display: block;
     margin: 0 auto; /* Center the canvas */
+    width: 90%; /* Adjust canvas width */
+    max-width: 480px; /* Set maximum canvas width */
 }
+
 
 
 Button {
