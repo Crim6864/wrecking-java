@@ -99,37 +99,15 @@ window.onload = function () {
 
 // Collision Detection with Paddle
 function paddleCollisionDetection() {
-    // Calculate the center of the ball
-    const ballCenterX = x;
-    const ballCenterY = y;
-
-    // Calculate the center of the paddle
-    const paddleCenterX = paddleX + paddleWidth / 2;
-    const paddleCenterY = paddleY + paddleHeight / 2;
-
-    // Calculate the distance between the centers of the ball and the paddle
-    const dx = ballCenterX - paddleCenterX;
-    const dy = ballCenterY - paddleCenterY;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    // Check if the distance is less than the sum of the ball radius and half the paddle width and height
-    if (distance < ballRadius + Math.max(paddleWidth, paddleHeight) / 2) {
-        // Calculate the angle of reflection based on the collision point
-        const reflectionAngle = Math.atan2(dy, dx);
-
-        // Adjust the bounce angle to make it more realistic
-        const bounceAngle = Math.PI / 2 - reflectionAngle;
-
-        // Update ball velocity components based on the bounce angle
-        dx = Math.cos(bounceAngle) * Math.abs(dx) * (dx > 0 ? 1 : -1);
-        dy = -Math.sin(bounceAngle) * Math.abs(dy);
-
-        // Update ball position to avoid sticking
-        x = paddleCenterX + (dx > 0 ? ballRadius : -ballRadius);
-        y = paddleCenterY + (dy > 0 ? ballRadius : -ballRadius);
-
-        // Reverse vertical direction
-        dy = -dy;
+    // Check if the ball is within the vertical range of the paddle
+    if (y + dy > canvas.height - paddleOffsetBottom - ballRadius - paddleHeight) {
+        // Check if the ball is within the horizontal range of the paddle
+        if (x > paddleX && x < paddleX + paddleWidth) {
+            // Reverse the vertical direction of the ball
+            dy = -dy;
+            // Move the ball outside of the paddle to prevent sticking
+            y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight - 1;
+        }
     } else if (y + dy > canvas.height - ballRadius) {
         // Ball misses the paddle, lose a life
         lives--;
@@ -140,7 +118,7 @@ function paddleCollisionDetection() {
         } else {
             // Reset ball position and continue game
             x = canvas.width / 2;
-            y = canvas.height - 30;
+            y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
             dx = 2;
             dy = -2;
             paddleX = (canvas.width - paddleWidth) / 2;
