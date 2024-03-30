@@ -32,48 +32,6 @@ var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
-// Set canvas size based on viewport dimensions
-function setCanvasSize() {
-    canvas.width = window.innerWidth * 0.9; // 90% of the viewport width
-    canvas.height = window.innerHeight * 0.9; // 90% of the viewport height
-}
-
-// Call setCanvasSize initially and when the window is resized
-setCanvasSize();
-window.addEventListener('resize', setCanvasSize);
-
-// Rest of the code remains unchanged
-// ...
-
-
-function setDifficulty(level) {
-    switch (level) {
-        case 'easy':
-            brickRowCount = 3;
-            brickColumnCount = 5;
-            break;
-        case 'medium':
-            brickRowCount = 4;
-            brickColumnCount = 6;
-            break;
-        case 'hard':
-            brickRowCount = 5;
-            brickColumnCount = 7;
-            break;
-    }
-}
-
-// Create bricks
-var bricks = [];
-function createBricks() {
-    for (var c = 0; c < brickColumnCount; c++) {
-        bricks[c] = [];
-        for (var r = 0; r < brickRowCount; r++) {
-            bricks[c][r] = { x: 0, y: 0, status: 1 };
-        }
-    }
-}
-
 // Event listeners for paddle control
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);

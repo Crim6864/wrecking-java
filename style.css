@@ -1,30 +1,28 @@
 * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 h1, h2 {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 canvas {
-    border: 1px solid #000;
     display: block;
-    margin: 0 auto; /* Center the canvas */
-    max-width: 480px; /* Set maximum canvas width */
-    width: 90vw; /* Adjust canvas width to 90% of viewport width */
-    height: 90vh; /* Adjust canvas height to 90% of viewport height */
-    max-height: 320px; /* Set maximum canvas height */
+    margin: 0 auto;
+    border: 1px solid #000;
 }
 
-Button {
-    text-align: center;
+button {
+    margin: 10px;
 }
 
-/* Media query for desktop screens */
-@media (min-width: 768px) {
+/* Adjust canvas size */
+@media screen and (min-width: 480px) {
     canvas {
-        width: 480px; /* Set fixed canvas width for desktop */
-        height: 320px; /* Set fixed canvas height for desktop */
+        width: 480px;
+        height: 320px;
     }
 }
