@@ -55,6 +55,24 @@ function drawBricks() {
     }
 }
 
+// Draw Ball
+function drawBall() {
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+    ctx.fillStyle = '#0095DD';
+    ctx.fill();
+    ctx.closePath();
+}
+
+// Draw Paddle
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
+    ctx.fillStyle = '#0095DD';
+    ctx.fill();
+    ctx.closePath();
+}
+
 // Collision Detection with Bricks
 function collisionDetection() {
     for (let c = 0; c < brickColumnCount; c++) {
@@ -242,28 +260,6 @@ function resetGame() {
     x = canvas.width / 2;
     y = canvas.height - 30;
     paddleX = (canvas.width - paddleWidth) / 2;
-}
-
-// Event Listeners for Keyboard Controls
-document.addEventListener('keydown', keyDownHandler, false);
-document.addEventListener('keyup', keyUpHandler, false);
-
-// Key Down Handler
-function keyDownHandler(e) {
-    if (e.key === 'Right' || e.key === 'ArrowRight') {
-        rightPressed = true;
-    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-        leftPressed = true;
-    }
-}
-
-// Key Up Handler
-function keyUpHandler(e) {
-    if (e.key === 'Right' || e.key === 'ArrowRight') {
-        rightPressed = false;
-    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-        leftPressed = false;
-    }
 }
 
 // Update Game Loop
