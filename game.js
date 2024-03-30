@@ -179,7 +179,7 @@ function wallCollisionDetection() {
         dy = -dy; // Reverse vertical direction if hitting top wall
     } else if (y + dy > canvas.height - ballRadius) { // Added condition for bottom wall
         lives--; // Lose a life when hitting the bottom wall
-        if (!lives) {
+        if (lives <= 0) { // Fixed condition to properly check if lives are zero or less
             // No more lives, game over
             alert('Game Over');
             document.location.reload();
