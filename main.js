@@ -70,6 +70,7 @@ function startGame(selectedDifficulty) {
     setDifficulty(difficulty);
     createBricks();
     gameStarted = true;
+    canvas.focus(); // Set focus to the canvas
     draw();
 }
 
@@ -220,7 +221,6 @@ function update() {
     // Check for collision with bricks
     collisionDetection();
 }
-
 
 // Main draw function
 function draw() {
