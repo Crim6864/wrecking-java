@@ -20,6 +20,7 @@ A more advanced colission check.
 Right now the product is fully functional but there are many more features to be added in the future. 
 
 1. More advanced features and better styling.
+2. More mobile friendly. (Currently works on mobile but is not good)
 
 
 
