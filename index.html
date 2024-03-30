@@ -1,20 +1,31 @@
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ball Wreck</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add custom styles here */
+    </style>
 </head>
 <body>
-    <h1>Welcome to Daniel's Wrecking Ball Game!</h1>
-    <h2>Choose a difficulty to start!</h2>
-    <canvas id="gameCanvas" tabindex="0"></canvas>
-    <button id="easy">Easy</button>
-    <button id="medium">Medium</button>
-    <button id="hard">Hard</button>
+    <div class="container">
+        <h1 class="mt-5">Welcome to Daniel's Wrecking Ball Game!</h1>
+        <h2>Choose a difficulty to start!</h2>
+        <canvas id="gameCanvas" class="mt-3" width="480" height="320" tabindex="0"></canvas>
+        <div class="mt-3">
+            <button id="easy" class="btn btn-primary mr-2">Easy</button>
+            <button id="medium" class="btn btn-primary mr-2">Medium</button>
+            <button id="hard" class="btn btn-primary">Hard</button>
+        </div>
+    </div>
 
+    <!-- Bootstrap JS and your custom script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

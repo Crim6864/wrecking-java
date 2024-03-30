@@ -2,10 +2,6 @@
 var canvas = document.getElementById("gameCanvas");
 var ctx = canvas.getContext("2d");
 
-// Adjust canvas size for mobile screens
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
 // Define paddle properties
 var paddleHeight = 10;
 var paddleWidth = 75;
@@ -260,5 +256,17 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
+// Set canvas dimensions based on the window size
+function setCanvasSize() {
+    canvas.width = window.innerWidth - 20;
+    canvas.height = window.innerHeight - 20;
+}
+
 // Set focus to the canvas when the page loads
 canvas.focus();
+
+// Initialize canvas size
+setCanvasSize();
+
+// Update canvas size when the window is resized
+window.addEventListener("resize", setCanvasSize);
