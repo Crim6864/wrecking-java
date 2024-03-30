@@ -1,4 +1,5 @@
 window.onload = function () {
+
     // Game Constants
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
@@ -97,47 +98,46 @@ window.onload = function () {
         }
     }
 
-// Collision Detection with Paddle
-function paddleCollisionDetection() {
-    // Check if the ball is within the vertical range of the paddle
-    if (y + dy > canvas.height - paddleOffsetBottom - ballRadius - paddleHeight) {
-        // Check if the ball's horizontal position is within the horizontal range of the paddle
-        if (x + ballRadius > paddleX && x - ballRadius < paddleX + paddleWidth) {
-            // Check if the ball's bottom edge is above or at the same level as the paddle's top edge
-            if (y + dy + ballRadius >= canvas.height - paddleOffsetBottom - paddleHeight) {
-                // Reverse the vertical direction of the ball
-                dy = -dy;
+    // Collision Detection with Paddle
+    function paddleCollisionDetection() {
+        // Check if the ball is within the vertical range of the paddle
+        if (y + dy > canvas.height - paddleOffsetBottom - ballRadius - paddleHeight) {
+            // Check if the ball's horizontal position is within the horizontal range of the paddle
+            if (x + ballRadius > paddleX && x - ballRadius < paddleX + paddleWidth) {
+                // Check if the ball's bottom edge is above or at the same level as the paddle's top edge
+                if (y + dy + ballRadius >= canvas.height - paddleOffsetBottom - paddleHeight) {
+                    // Reverse the vertical direction of the ball
+                    dy = -dy;
 
-                // Adjust the ball's position to prevent sticking
-                y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight - 1;
+                    // Adjust the ball's position to prevent sticking
+                    y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight - 1;
 
-                // Add a slight horizontal velocity based on the paddle's movement
-                // This will ensure the ball doesn't get stuck and continues to move horizontally
-                if (rightPressed) {
-                    dx += 0.5;
-                } else if (leftPressed) {
-                    dx -= 0.5;
+                    // Add a slight horizontal velocity based on the paddle's movement
+                    // This will ensure the ball doesn't get stuck and continues to move horizontally
+                    if (rightPressed) {
+                        dx += 0.5;
+                    } else if (leftPressed) {
+                        dx -= 0.5;
+                    }
                 }
-            }
-        } else {
-            // Ball misses the paddle, lose a life
-            lives--;
-            if (!lives) {
-                // No more lives, game over
-                alert('Game Over');
-                document.location.reload();
             } else {
-                // Reset ball position and continue game
-                x = canvas.width / 2;
-                y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
-                dx = 2;
-                dy = -2;
-                paddleX = (canvas.width - paddleWidth) / 2;
+                // Ball misses the paddle, lose a life
+                lives--;
+                if (!lives) {
+                    // No more lives, game over
+                    alert('Game Over');
+                    document.location.reload();
+                } else {
+                    // Reset ball position and continue game
+                    x = canvas.width / 2;
+                    y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
+                    dx = 2;
+                    dy = -2;
+                    paddleX = (canvas.width - paddleWidth) / 2;
+                }
             }
         }
     }
-}
-
 
     // Draw Lives
     function drawLives() {
@@ -173,29 +173,29 @@ function paddleCollisionDetection() {
         ctx.stroke();
     }
 
-// Wall Collision Detection
-function wallCollisionDetection() {
-    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-        dx = -dx; // Reverse horizontal direction if hitting left or right wall
-    }
-    if (y + dy < ballRadius) {
-        dy = -dy; // Reverse vertical direction if hitting top wall
-    } else if (y + dy > canvas.height - ballRadius) { // Added condition for bottom wall
-        lives--; // Lose a life when hitting the bottom wall
-        if (lives <= 0) { // Fixed condition to properly check if lives are zero or less
-            // No more lives, game over
-            alert('Game Over');
-            document.location.reload();
-        } else {
-            // Reset ball position and continue game
-            x = canvas.width / 2;
-            y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
-            dx = 2;
-            dy = -2;
-            paddleX = (canvas.width - paddleWidth) / 2;
+    // Wall Collision Detection
+    function wallCollisionDetection() {
+        if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+            dx = -dx; // Reverse horizontal direction if hitting left or right wall
+        }
+        if (y + dy < ballRadius) {
+            dy = -dy; // Reverse vertical direction if hitting top wall
+        } else if (y + dy > canvas.height - ballRadius) { // Added condition for bottom wall
+            lives--; // Lose a life when hitting the bottom wall
+            if (lives <= 0) { // Fixed condition to properly check if lives are zero or less
+                // No more lives, game over
+                alert('Game Over');
+                document.location.reload();
+            } else {
+                // Reset ball position and continue game
+                x = canvas.width / 2;
+                y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width - paddleWidth) / 2;
+            }
         }
     }
-}
 
     // Update Paddle Position
     function updatePaddlePosition() {
