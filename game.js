@@ -102,7 +102,7 @@ function paddleCollisionDetection() {
     // Check if the ball is within the vertical range of the paddle
     if (y + dy > canvas.height - paddleOffsetBottom - ballRadius - paddleHeight) {
         // Check if the ball's horizontal position is within the horizontal range of the paddle
-        if (x > paddleX && x < paddleX + paddleWidth) {
+        if (x + ballRadius > paddleX && x - ballRadius < paddleX + paddleWidth) {
             // Reverse the vertical direction of the ball
             dy = -dy;
 
@@ -116,24 +116,25 @@ function paddleCollisionDetection() {
             } else if (leftPressed) {
                 dx -= 0.5;
             }
-        }
-    } else if (y + dy > canvas.height - ballRadius) {
-        // Ball misses the paddle, lose a life
-        lives--;
-        if (!lives) {
-            // No more lives, game over
-            alert('Game Over');
-            document.location.reload();
         } else {
-            // Reset ball position and continue game
-            x = canvas.width / 2;
-            y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
-            dx = 2;
-            dy = -2;
-            paddleX = (canvas.width - paddleWidth) / 2;
+            // Ball misses the paddle, lose a life
+            lives--;
+            if (!lives) {
+                // No more lives, game over
+                alert('Game Over');
+                document.location.reload();
+            } else {
+                // Reset ball position and continue game
+                x = canvas.width / 2;
+                y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width - paddleWidth) / 2;
+            }
         }
     }
 }
+
 
 
     // Draw Lives
