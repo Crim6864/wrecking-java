@@ -76,6 +76,18 @@ function paddleCollisionDetection() {
     }
 }
 
+// Draw Walls
+function drawWalls() {
+    ctx.beginPath();
+    ctx.moveTo(0, 0); // Top-left corner
+    ctx.lineTo(canvas.width, 0); // Top-right corner
+    ctx.lineTo(canvas.width, canvas.height); // Bottom-right corner
+    ctx.lineTo(0, canvas.height); // Bottom-left corner
+    ctx.closePath();
+    ctx.strokeStyle = '#0095DD';
+    ctx.stroke();
+}
+
 // Wall Collision Detection
 function wallCollisionDetection() {
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
@@ -97,21 +109,13 @@ function wallCollisionDetection() {
     }
 }
 
-
-// Update Game
-function update() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBricks();
-    drawBall();
-    drawPaddle();
-    collisionDetection();
-    paddleCollisionDetection();
-    wallCollisionDetection();
-    updatePaddlePosition();
-    x += dx;
-    y += dy;
-
-    requestAnimationFrame(update);
+// Update Paddle Position
+function updatePaddlePosition() {
+    if (rightPressed && paddleX < canvas.width - paddleWidth) {
+        paddleX += 7;
+    } else if (leftPressed && paddleX > 0) {
+        paddleX -= 7;
+    }
 }
 
 // Event Listeners
@@ -152,18 +156,10 @@ function drawPaddle() {
     ctx.closePath();
 }
 
-// Update Paddle Position
-function updatePaddlePosition() {
-    if (rightPressed && paddleX < canvas.width - paddleWidth) {
-        paddleX += 7;
-    } else if (leftPressed && paddleX > 0) {
-        paddleX -= 7;
-    }
-}
-
 // Update Game
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawWalls(); // Draw walls
     drawBricks();
     drawBall();
     drawPaddle();
