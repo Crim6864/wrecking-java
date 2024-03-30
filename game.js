@@ -283,13 +283,13 @@ window.onload = function () {
         startGame('hard');
     });
 
-    // Reset Game Function
-    function resetGame() {
-        lives = 3;
-        x = canvas.width / 2;
-        y = canvas.height - 30;
-        paddleX = (canvas.width - paddleWidth) / 2;
-    }
+// Reset Game Function
+function resetGame() {
+    lives = 3;
+    x = canvas.width / 2;
+    y = canvas.height - 30 - ballRadius; // Adjusted initial position for the ball
+    paddleX = (canvas.width - paddleWidth) / 2;
+}
 
     // Event Listeners for Keyboard Controls
     document.addEventListener('keydown', keyDownHandler, false);
