@@ -76,6 +76,16 @@ function paddleCollisionDetection() {
     }
 }
 
+// Wall Collision Detection
+function wallCollisionDetection() {
+    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+    }
+    if (y + dy < ballRadius) {
+        dy = -dy;
+    }
+}
+
 // Update Game
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -84,6 +94,8 @@ function update() {
     drawPaddle();
     collisionDetection();
     paddleCollisionDetection();
+    wallCollisionDetection();
+    updatePaddlePosition();
     x += dx;
     y += dy;
 
@@ -145,6 +157,7 @@ function update() {
     drawPaddle();
     collisionDetection();
     paddleCollisionDetection();
+    wallCollisionDetection();
     updatePaddlePosition();
     x += dx;
     y += dy;
