@@ -73,7 +73,7 @@ function startGameWithDelay(selectedDifficulty) {
     document.body.appendChild(announcement);
 
     // Delay the start of the game
-    setTimeout(function() {
+    setTimeout(function () {
         document.body.removeChild(announcement); // Remove announcement
         startGame(selectedDifficulty); // Start the game
         canvas.focus(); // Set focus to the canvas
@@ -90,13 +90,13 @@ function startGame(selectedDifficulty) {
 }
 
 // Event listeners for difficulty buttons
-document.getElementById("easy").addEventListener("click", function() {
+document.getElementById("easy").addEventListener("click", function () {
     startGameWithDelay('easy');
 });
-document.getElementById("medium").addEventListener("click", function() {
+document.getElementById("medium").addEventListener("click", function () {
     startGameWithDelay('medium');
 });
-document.getElementById("hard").addEventListener("click", function() {
+document.getElementById("hard").addEventListener("click", function () {
     startGameWithDelay('hard');
 });
 
@@ -226,8 +226,14 @@ function update() {
         dy = -dy;
     } else if (y + dy > canvas.height - ballRadius) {
         // Ball collision with paddle
-        if (x > paddleX && x < paddleX + paddleWidth && y + dy > canvas.height - paddleHeight - ballRadius && y + dy < canvas.height - paddleHeight) {
+        if (
+            x > paddleX &&
+            x < paddleX + paddleWidth &&
+            y + dy > canvas.height - paddleHeight - ballRadius && // Check if the ball is below the top surface of the paddle
+            y + dy < canvas.height - ballRadius // Check if the ball is above the bottom surface of the paddle
+        ) {
             dy = -dy;
+
         } else {
             // Ball fell off the screen
             lives--;
