@@ -18,25 +18,42 @@ var dy = -2;
 var rightPressed = false;
 var leftPressed = false;
 
-// Define brick properties
-var brickRowCount = 5;
-var brickColumnCount = 3;
-var brickWidth = 75;
-var brickHeight = 20;
-var brickPadding = 10;
-var brickOffsetTop = 30;
-var brickOffsetLeft = 30;
-
 // Define game state
 var lives = 3;
 var gameStarted = false; // Indicates if the game has started
+var difficulty; // Stores the selected difficulty
+
+// Define brick properties based on difficulty levels
+var brickRowCount = 0;
+var brickColumnCount = 0;
+var brickOffsetTop = 30;
+var brickOffsetLeft = 30;
+
+function setDifficulty(level) {
+    switch (level) {
+        case 'easy':
+            brickRowCount = 3;
+            brickColumnCount = 5;
+            break;
+        case 'medium':
+            brickRowCount = 4;
+            brickColumnCount = 6;
+            break;
+        case 'hard':
+            brickRowCount = 5;
+            brickColumnCount = 7;
+            break;
+    }
+}
 
 // Create bricks
 var bricks = [];
-for (var c = 0; c < brickColumnCount; c++) {
-    bricks[c] = [];
-    for (var r = 0; r < brickRowCount; r++) {
-        bricks[c][r] = { x: 0, y: 0, status: 1 };
+function createBricks() {
+    for (var c = 0; c < brickColumnCount; c++) {
+        bricks[c] = [];
+        for (var r = 0; r < brickRowCount; r++) {
+            bricks[c][r] = { x: 0, y: 0, status: 1 };
+        }
     }
 }
 
@@ -47,17 +64,17 @@ canvas.addEventListener("touchstart", touchStartHandler, false);
 canvas.addEventListener("touchend", touchEndHandler, false);
 canvas.addEventListener("touchmove", touchMoveHandler, false);
 
-// Function to start the game when spacebar is pressed
-function startGame() {
-    if (event.keyCode === 32 && !gameStarted) { // Spacebar
-        gameStarted = true;
-        draw();
-    }
+// Function to start the game
+function startGame(selectedDifficulty) {
+    difficulty = selectedDifficulty;
+    setDifficulty(difficulty);
+    createBricks();
+    gameStarted = true;
+    draw();
 }
 
 // Functions for paddle control
 function keyDownHandler(e) {
-    startGame();
     if (e.key == "Right" || e.key == "ArrowRight") {
         rightPressed = true;
     } else if (e.key == "Left" || e.key == "ArrowLeft") {
@@ -74,7 +91,6 @@ function keyUpHandler(e) {
 }
 
 function touchStartHandler(e) {
-    startGame();
     var touch = e.touches[0];
     if (touch.pageX > canvas.width / 2) {
         rightPressed = true;
@@ -204,6 +220,7 @@ function update() {
     // Check for collision with bricks
     collisionDetection();
 }
+
 
 // Main draw function
 function draw() {
