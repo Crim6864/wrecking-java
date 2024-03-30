@@ -103,18 +103,21 @@ function paddleCollisionDetection() {
     if (y + dy > canvas.height - paddleOffsetBottom - ballRadius - paddleHeight) {
         // Check if the ball's horizontal position is within the horizontal range of the paddle
         if (x + ballRadius > paddleX && x - ballRadius < paddleX + paddleWidth) {
-            // Reverse the vertical direction of the ball
-            dy = -dy;
+            // Check if the ball's bottom edge is above or at the same level as the paddle's top edge
+            if (y + dy + ballRadius >= canvas.height - paddleOffsetBottom - paddleHeight) {
+                // Reverse the vertical direction of the ball
+                dy = -dy;
 
-            // Adjust the ball's position to prevent sticking
-            y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight - 1;
+                // Adjust the ball's position to prevent sticking
+                y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight - 1;
 
-            // Add a slight horizontal velocity based on the paddle's movement
-            // This will ensure the ball doesn't get stuck and continues to move horizontally
-            if (rightPressed) {
-                dx += 0.5;
-            } else if (leftPressed) {
-                dx -= 0.5;
+                // Add a slight horizontal velocity based on the paddle's movement
+                // This will ensure the ball doesn't get stuck and continues to move horizontally
+                if (rightPressed) {
+                    dx += 0.5;
+                } else if (leftPressed) {
+                    dx -= 0.5;
+                }
             }
         } else {
             // Ball misses the paddle, lose a life
@@ -134,7 +137,6 @@ function paddleCollisionDetection() {
         }
     }
 }
-
 
 
     // Draw Lives
