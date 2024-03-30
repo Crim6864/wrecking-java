@@ -32,6 +32,16 @@ var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
+// Set canvas size based on viewport dimensions
+function setCanvasSize() {
+    canvas.width = Math.min(window.innerWidth * 0.9, 480); // 90% of the viewport width or maximum of 480px
+    canvas.height = Math.min(window.innerHeight * 0.9, 320); // 90% of the viewport height or maximum of 320px
+}
+
+// Call setCanvasSize initially and when the window is resized
+setCanvasSize();
+window.addEventListener('resize', setCanvasSize);
+
 // Event listeners for paddle control
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
