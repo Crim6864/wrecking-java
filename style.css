@@ -7,16 +7,15 @@ h1, h2 {
     margin-bottom: 50px;
 }
 
-/* Add your custom styles here */
 canvas {
     border: 1px solid #000;
     display: block;
     margin: 0 auto; /* Center the canvas */
-    width: 90%; /* Adjust canvas width */
+    width: 90vw; /* Adjust canvas width to 90% of viewport width */
     max-width: 480px; /* Set maximum canvas width */
+    height: 90vh; /* Adjust canvas height to 90% of viewport height */
+    max-height: 320px; /* Set maximum canvas height */
 }
-
-
 
 Button {
     text-align: center;

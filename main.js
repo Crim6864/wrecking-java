@@ -2,12 +2,6 @@
 var canvas = document.getElementById("gameCanvas");
 var ctx = canvas.getContext("2d");
 
-// Calculate canvas size based on the viewport dimensions
-var canvasWidth = window.innerWidth * 0.9; // 90% of the viewport width
-var canvasHeight = window.innerHeight * 0.9; // 90% of the viewport height
-canvas.width = canvasWidth;
-canvas.height = canvasHeight;
-
 // Define paddle properties
 var paddleHeight = 10;
 var paddleWidth = 75;
@@ -37,6 +31,20 @@ var brickHeight = 20;
 var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
+
+// Set canvas size based on viewport dimensions
+function setCanvasSize() {
+    canvas.width = window.innerWidth * 0.9; // 90% of the viewport width
+    canvas.height = window.innerHeight * 0.9; // 90% of the viewport height
+}
+
+// Call setCanvasSize initially and when the window is resized
+setCanvasSize();
+window.addEventListener('resize', setCanvasSize);
+
+// Rest of the code remains unchanged
+// ...
+
 
 function setDifficulty(level) {
     switch (level) {
