@@ -69,14 +69,18 @@ canvas.addEventListener("touchmove", touchMoveHandler, false);
 
 // Event listeners for difficulty buttons
 document.getElementById("easy").addEventListener("click", function() {
+    console.log("Easy button clicked");
     startGameWithDelay('easy');
 });
 document.getElementById("medium").addEventListener("click", function() {
+    console.log("Medium button clicked");
     startGameWithDelay('medium');
 });
 document.getElementById("hard").addEventListener("click", function() {
+    console.log("Hard button clicked");
     startGameWithDelay('hard');
 });
+
 
 // Function to start the game with a delay
 function startGameWithDelay(selectedDifficulty) {
