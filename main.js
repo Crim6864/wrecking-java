@@ -88,12 +88,18 @@ function startGame(selectedDifficulty) {
 
 // Event listeners for difficulty buttons
 document.getElementById("easy").addEventListener("click", function () {
+    brickRowCount = 5;  // Set the number of rows
+    brickColumnCount = 3;  // Set the number of columns
     startGameWithDelay('easy');
 });
 document.getElementById("medium").addEventListener("click", function () {
+    brickRowCount = 7;  // Set the number of rows
+    brickColumnCount = 4;  // Set the number of columns
     startGameWithDelay('medium');
 });
 document.getElementById("hard").addEventListener("click", function () {
+    brickRowCount = 10;  // Set the number of rows
+    brickColumnCount = 5;  // Set the number of columns
     startGameWithDelay('hard');
 });
 
@@ -244,3 +250,10 @@ function draw() {
     update();
     requestAnimationFrame(draw);
 }
+
+// Event listeners
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+canvas.addEventListener("touchstart", touchStartHandler, false);
+canvas.addEventListener("touchmove", touchMoveHandler, false);
+canvas.addEventListener("touchend", touchEndHandler, false);
