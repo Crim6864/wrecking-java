@@ -97,56 +97,56 @@ window.onload = function () {
         }
     }
 
-    // Collision Detection with Paddle
-    function paddleCollisionDetection() {
-        // Calculate the center of the ball
-        const ballCenterX = x + ballRadius;
-        const ballCenterY = y + ballRadius;
+// Collision Detection with Paddle
+function paddleCollisionDetection() {
+    // Calculate the center of the ball
+    const ballCenterX = x + ballRadius;
+    const ballCenterY = y + ballRadius;
 
-        // Calculate the center of the paddle
-        const paddleCenterX = paddleX + paddleWidth / 2;
-        const paddleCenterY = paddleY + paddleHeight / 2;
+    // Calculate the center of the paddle
+    const paddleCenterX = paddleX + paddleWidth / 2;
+    const paddleCenterY = paddleY + paddleHeight / 2;
 
-        // Calculate the distance between the centers of the ball and the paddle
-        const dx = ballCenterX - paddleCenterX;
-        const dy = ballCenterY - paddleCenterY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+    // Calculate the distance between the centers of the ball and the paddle
+    const dx = ballCenterX - paddleCenterX;
+    const dy = ballCenterY - paddleCenterY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Check if the distance is less than the sum of the ball radius and half the paddle width and height
-        if (distance < ballRadius + paddleWidth / 2 && Math.abs(dy) < paddleHeight / 2) {
-            // Calculate the angle of reflection based on the collision point
-            const reflectionAngle = Math.atan2(dy, dx);
+    // Check if the distance is less than the sum of the ball radius and half the paddle width and height
+    if (distance < ballRadius + paddleWidth / 2 && Math.abs(dy) < paddleHeight / 2) {
+        // Calculate the angle of reflection based on the collision point
+        const reflectionAngle = Math.atan2(dy, dx);
 
-            // Adjust the bounce angle to make it more realistic
-            const bounceAngle = Math.PI / 2 - reflectionAngle;
+        // Adjust the bounce angle to make it more realistic
+        const bounceAngle = Math.PI / 2 - reflectionAngle;
 
-            // Update ball velocity components based on the bounce angle
-            dx = Math.cos(bounceAngle) * Math.abs(dx) * (dx > 0 ? 1 : -1);
-            dy = -Math.sin(bounceAngle) * Math.abs(dy);
+        // Update ball velocity components based on the bounce angle
+        dx = Math.cos(bounceAngle) * Math.abs(dx) * (dx > 0 ? 1 : -1);
+        dy = -Math.sin(bounceAngle) * Math.abs(dy);
 
-            // Update ball position to avoid sticking
-            x = paddleX + (dx > 0 ? paddleWidth + ballRadius : -ballRadius);
-            y = paddleY - ballRadius;
+        // Update ball position to avoid sticking
+        x = paddleX + (dx > 0 ? paddleWidth + ballRadius : -ballRadius);
+        y = paddleY - ballRadius;
 
-            // Reverse vertical direction
-            dy = -dy;
-        } else if (y + dy > canvas.height - ballRadius) {
-            // Ball misses the paddle, lose a life
-            lives--;
-            if (!lives) {
-                // No more lives, game over
-                alert('Game Over');
-                document.location.reload();
-            } else {
-                // Reset ball position and continue game
-                x = canvas.width / 2;
-                y = canvas.height - 30;
-                dx = 2;
-                dy = -2;
-                paddleX = (canvas.width - paddleWidth) / 2;
-            }
+        // Reverse vertical direction
+        dy = -dy;
+    } else if (y + dy > canvas.height - ballRadius) {
+        // Ball misses the paddle, lose a life
+        lives--;
+        if (!lives) {
+            // No more lives, game over
+            alert('Game Over');
+            document.location.reload();
+        } else {
+            // Reset ball position and continue game
+            x = canvas.width / 2;
+            y = canvas.height - 30;
+            dx = 2;
+            dy = -2;
+            paddleX = (canvas.width - paddleWidth) / 2;
         }
     }
+}
 
     // Draw Lives
     function drawLives() {
