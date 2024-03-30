@@ -99,7 +99,6 @@ document.getElementById("hard").addEventListener("click", function() {
     startGameWithDelay('hard');
 });
 
-
 // Functions for paddle control
 function keyDownHandler(e) {
     if (e.key == "Right" || e.key == "ArrowRight") {
