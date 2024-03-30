@@ -151,19 +151,7 @@ function updatePaddlePosition() {
     }
 }
 
-// Start Button Event Listener
-document.getElementById('easyButton').addEventListener('click', function() {
-    startGame('easy');
-});
-
-document.getElementById('mediumButton').addEventListener('click', function() {
-    startGame('medium');
-});
-
-document.getElementById('hardButton').addEventListener('click', function() {
-    startGame('hard');
-});
-
+// Function to start the game
 function startGame(difficulty) {
     // Set game parameters based on difficulty
     if (difficulty === 'easy') {
@@ -189,12 +177,27 @@ function startGame(difficulty) {
     update();
 }
 
+// Start Button Event Listener
+document.getElementById('easyButton').addEventListener('click', function() {
+    startGame('easy');
+});
+
+document.getElementById('mediumButton').addEventListener('click', function() {
+    startGame('medium');
+});
+
+document.getElementById('hardButton').addEventListener('click', function() {
+    startGame('hard');
+});
+
+// Reset Game Function
 function resetGame() {
     // Reset game elements to initial state
     // For example:
     lives = 3;
     // Reset bricks, paddle, ball positions, etc.
 }
+
 
 // Event Listeners
 document.addEventListener('keydown', keyDownHandler, false);
