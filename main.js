@@ -75,9 +75,37 @@ function startGameWithDelay(selectedDifficulty) {
     setTimeout(function() {
         document.body.removeChild(announcement); // Remove announcement
         startGame(selectedDifficulty); // Start the game
-        canvas.focus(); // Set focus to the canvas
     }, 5000); // Delay of 5 seconds
 }
+
+// Function to start the game
+function startGame(selectedDifficulty) {
+    difficulty = selectedDifficulty;
+    setDifficulty(difficulty);
+    createBricks();
+    gameStarted = true;
+    draw();
+}
+
+// Event listeners for difficulty buttons
+document.getElementById("easy").addEventListener("click", function() {
+    startGameWithDelay('easy');
+});
+document.getElementById("medium").addEventListener("click", function() {
+    startGameWithDelay('medium');
+});
+document.getElementById("hard").addEventListener("click", function() {
+    startGameWithDelay('hard');
+});
+
+// Event listener to check if canvas receives focus
+canvas.addEventListener("focus", function() {
+    draw(); // Start the game if canvas receives focus
+});
+
+// Set focus to the canvas when the page loads
+canvas.focus();
+
 
 
 // Function to start the game
