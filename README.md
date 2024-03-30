@@ -13,12 +13,13 @@ To make a game everyone can enjoy!
 # Features 
 
 A fully working Wrecking Ball Game.
-
+Three difficulties Easy, Medium and Hard.
+A more advanced colission check.
 
 ## Future Features
 Right now the product is fully functional but there are many more features to be added in the future. 
 
-1. More Game Modes and Levels
+1. More advanced features and better styling.
 
 
 
