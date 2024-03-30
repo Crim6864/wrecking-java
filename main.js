@@ -232,3 +232,6 @@ function draw() {
     update();
     requestAnimationFrame(draw);
 }
+
+// Set focus to the canvas when the page loads
+canvas.focus();
