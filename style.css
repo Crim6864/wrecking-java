@@ -20,3 +20,11 @@ canvas {
 Button {
     text-align: center;
 }
+
+/* Media query for desktop screens */
+@media (min-width: 768px) {
+    canvas {
+        width: 480px; /* Set fixed canvas width for desktop */
+        height: 320px; /* Set fixed canvas height for desktop */
+    }
+}
