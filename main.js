@@ -64,6 +64,7 @@ canvas.addEventListener("touchstart", touchStartHandler, false);
 canvas.addEventListener("touchend", touchEndHandler, false);
 canvas.addEventListener("touchmove", touchMoveHandler, false);
 
+
 // Function to start the game with a delay
 function startGameWithDelay(selectedDifficulty) {
     // Show announcement
@@ -75,6 +76,7 @@ function startGameWithDelay(selectedDifficulty) {
     setTimeout(function() {
         document.body.removeChild(announcement); // Remove announcement
         startGame(selectedDifficulty); // Start the game
+        canvas.focus(); // Set focus to the canvas
     }, 5000); // Delay of 5 seconds
 }
 
@@ -98,14 +100,8 @@ document.getElementById("hard").addEventListener("click", function() {
     startGameWithDelay('hard');
 });
 
-// Event listener to check if canvas receives focus
-canvas.addEventListener("focus", function() {
-    draw(); // Start the game if canvas receives focus
-});
-
 // Set focus to the canvas when the page loads
 canvas.focus();
-
 
 
 // Function to start the game
