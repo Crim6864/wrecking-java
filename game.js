@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 const ballRadius = 10;
 const paddleHeight = 10;
 const paddleWidth = 75;
-const brickRowCount = 5;
+let brickRowCount = 5; // Variable to hold the number of rows of bricks
 const brickColumnCount = 8;
 const brickWidth = 75;
 const brickHeight = 20;
@@ -112,23 +112,23 @@ function drawLives() {
 function drawWalls() {
     ctx.lineWidth = 5; // Thickness for walls
     ctx.strokeStyle = '#0095DD'; // Color for walls
-    
+
     // Top wall
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(canvas.width, 0);
     ctx.stroke();
-    
+
     // Right wall
     ctx.moveTo(canvas.width, 0);
     ctx.lineTo(canvas.width, canvas.height);
     ctx.stroke();
-    
+
     // Bottom wall
     ctx.moveTo(canvas.width, canvas.height);
     ctx.lineTo(0, canvas.height);
     ctx.stroke();
-    
+
     // Left wall
     ctx.moveTo(0, canvas.height);
     ctx.lineTo(0, 0);
@@ -175,15 +175,15 @@ function startGame(difficulty) {
 }
 
 // Start Button Event Listener
-document.getElementById('easyButton').addEventListener('click', function() {
+document.getElementById('easyButton').addEventListener('click', function () {
     startGame('easy');
 });
 
-document.getElementById('mediumButton').addEventListener('click', function() {
+document.getElementById('mediumButton').addEventListener('click', function () {
     startGame('medium');
 });
 
-document.getElementById('hardButton').addEventListener('click', function() {
+document.getElementById('hardButton').addEventListener('click', function () {
     startGame('hard');
 });
 
