@@ -184,6 +184,7 @@ function drawBricks() {
     }
 }
 
+
 // Draw the score and lives
 function drawScore() {
     ctx.font = "16px Arial";
