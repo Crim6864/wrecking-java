@@ -26,9 +26,6 @@ var difficulty; // Stores the selected difficulty
 // Define brick properties based on difficulty levels
 var brickRowCount = 0;
 var brickColumnCount = 0;
-var brickWidth = 75; // Added brick width
-var brickHeight = 20; // Added brick height
-var brickPadding = 10; // Added brick padding
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
@@ -67,20 +64,6 @@ canvas.addEventListener("touchstart", touchStartHandler, false);
 canvas.addEventListener("touchend", touchEndHandler, false);
 canvas.addEventListener("touchmove", touchMoveHandler, false);
 
-// Event listeners for difficulty buttons
-document.getElementById("easy").addEventListener("click", function() {
-    console.log("Easy button clicked");
-    startGameWithDelay('easy');
-});
-document.getElementById("medium").addEventListener("click", function() {
-    console.log("Medium button clicked");
-    startGameWithDelay('medium');
-});
-document.getElementById("hard").addEventListener("click", function() {
-    console.log("Hard button clicked");
-    startGameWithDelay('hard');
-});
-
 
 // Function to start the game with a delay
 function startGameWithDelay(selectedDifficulty) {
@@ -105,6 +88,17 @@ function startGame(selectedDifficulty) {
     gameStarted = true;
     draw();
 }
+
+// Event listeners for difficulty buttons
+document.getElementById("easy").addEventListener("click", function() {
+    startGameWithDelay('easy');
+});
+document.getElementById("medium").addEventListener("click", function() {
+    startGameWithDelay('medium');
+});
+document.getElementById("hard").addEventListener("click", function() {
+    startGameWithDelay('hard');
+});
 
 // Functions for paddle control
 function keyDownHandler(e) {
@@ -232,7 +226,7 @@ function update() {
         dy = -dy;
     } else if (y + dy > canvas.height - ballRadius) {
         // Ball collision with paddle
-        if (x > paddleX && x < paddleX + paddleWidth && y + dy > canvas.height - paddleHeight - ballRadius) {
+        if (x > paddleX && x < paddleX + paddleWidth && y + dy > canvas.height - paddleHeight - ballRadius && y + dy < canvas.height - paddleHeight) {
             dy = -dy;
         } else {
             // Ball fell off the screen
