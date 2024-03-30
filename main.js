@@ -2,6 +2,12 @@
 var canvas = document.getElementById("gameCanvas");
 var ctx = canvas.getContext("2d");
 
+// Calculate canvas size based on the viewport dimensions
+var canvasWidth = window.innerWidth * 0.9; // 90% of the viewport width
+var canvasHeight = window.innerHeight * 0.9; // 90% of the viewport height
+canvas.width = canvasWidth;
+canvas.height = canvasHeight;
+
 // Define paddle properties
 var paddleHeight = 10;
 var paddleWidth = 75;
@@ -21,15 +27,16 @@ var leftPressed = false;
 // Define game state
 var lives = 3;
 var gameStarted = false; // Indicates if the game has started
+var difficulty; // Stores the selected difficulty
+
+// Define brick properties based on difficulty levels
+var brickRowCount = 0;
+var brickColumnCount = 0;
 var brickWidth = 75;
 var brickHeight = 20;
 var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
-
-// Define brick properties based on difficulty levels
-var brickRowCount = 0;
-var brickColumnCount = 0;
 
 function setDifficulty(level) {
     switch (level) {
@@ -63,8 +70,43 @@ function createBricks() {
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 canvas.addEventListener("touchstart", touchStartHandler, false);
-canvas.addEventListener("touchend", touchEndHandler, false);
 canvas.addEventListener("touchmove", touchMoveHandler, false);
+canvas.addEventListener("touchend", touchEndHandler, false);
+
+// Function to start the game with a delay
+function startGameWithDelay(selectedDifficulty) {
+    // Show announcement
+    var announcement = document.createElement("div");
+    announcement.textContent = "Starting game in 5 seconds...";
+    document.body.appendChild(announcement);
+
+    // Delay the start of the game
+    setTimeout(function () {
+        document.body.removeChild(announcement); // Remove announcement
+        startGame(selectedDifficulty); // Start the game
+        canvas.focus(); // Set focus to the canvas
+    }, 5000); // Delay of 5 seconds
+}
+
+// Function to start the game
+function startGame(selectedDifficulty) {
+    difficulty = selectedDifficulty;
+    setDifficulty(difficulty);
+    createBricks();
+    gameStarted = true;
+    draw();
+}
+
+// Event listeners for difficulty buttons
+document.getElementById("easy").addEventListener("click", function () {
+    startGameWithDelay('easy');
+});
+document.getElementById("medium").addEventListener("click", function () {
+    startGameWithDelay('medium');
+});
+document.getElementById("hard").addEventListener("click", function () {
+    startGameWithDelay('hard');
+});
 
 // Functions for paddle control
 function keyDownHandler(e) {
@@ -84,6 +126,7 @@ function keyUpHandler(e) {
 }
 
 function touchStartHandler(e) {
+    e.preventDefault();
     var touch = e.touches[0];
     if (touch.pageX > canvas.width / 2) {
         rightPressed = true;
@@ -92,12 +135,8 @@ function touchStartHandler(e) {
     }
 }
 
-function touchEndHandler(e) {
-    rightPressed = false;
-    leftPressed = false;
-}
-
 function touchMoveHandler(e) {
+    e.preventDefault();
     var touch = e.touches[0];
     if (touch.pageX > canvas.width / 2) {
         rightPressed = true;
@@ -108,39 +147,10 @@ function touchMoveHandler(e) {
     }
 }
 
-// Function to start the game with a delay
-function startGameWithDelay(selectedDifficulty) {
-    // Show announcement
-    var announcement = document.createElement("div");
-    announcement.textContent = "Starting game in 5 seconds...";
-    document.body.appendChild(announcement);
-
-    // Delay the start of the game
-    setTimeout(function () {
-        document.body.removeChild(announcement); // Remove announcement
-        startGame(selectedDifficulty); // Start the game
-        canvas.focus(); // Set focus to the canvas
-    }, 5000); // Delay of 5 seconds
+function touchEndHandler(e) {
+    rightPressed = false;
+    leftPressed = false;
 }
-
-// Function to start the game
-function startGame(selectedDifficulty) {
-    setDifficulty(selectedDifficulty);
-    createBricks();
-    gameStarted = true;
-    draw();
-}
-
-// Event listeners for difficulty buttons
-document.getElementById("easy").addEventListener("click", function () {
-    startGameWithDelay('easy');
-});
-document.getElementById("medium").addEventListener("click", function () {
-    startGameWithDelay('medium');
-});
-document.getElementById("hard").addEventListener("click", function () {
-    startGameWithDelay('hard');
-});
 
 // Collision detection for ball and bricks
 function collisionDetection() {
@@ -198,6 +208,13 @@ function drawBricks() {
     }
 }
 
+// Draw the score and lives
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
+}
+
 // Update game state
 function update() {
     // Move the paddle
@@ -226,6 +243,7 @@ function update() {
             y + dy < canvas.height - ballRadius // Check if the ball is above the bottom surface of the paddle
         ) {
             dy = -dy;
+
         } else {
             // Ball fell off the screen
             lives--;
@@ -252,21 +270,7 @@ function draw() {
     drawBricks();
     drawBall();
     drawPaddle();
+    drawScore();
     update();
     requestAnimationFrame(draw);
 }
-
-// Set canvas dimensions based on the window size
-function setCanvasSize() {
-    canvas.width = window.innerWidth - 20;
-    canvas.height = window.innerHeight - 20;
-}
-
-// Set focus to the canvas when the page loads
-canvas.focus();
-
-// Initialize canvas size
-setCanvasSize();
-
-// Update canvas size when the window is resized
-window.addEventListener("resize", setCanvasSize);
