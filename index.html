@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ball Wreck</title>
-    <!-- Include Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wrecking Ball Game</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Daniel's Wrecking Ball Game!</h1>
-        <h2>Choose a difficulty to start!</h2>
-        <canvas id="gameCanvas" tabindex="0"></canvas>
-        <div class="d-flex justify-content-center">
-            <button id="easy" class="btn btn-primary">Easy</button>
-            <button id="medium" class="btn btn-primary">Medium</button>
-            <button id="hard" class="btn btn-primary">Hard</button>
-        </div>
+  <div class="container">
+    <h1 class="text-center">Daniel's Wrecking Ball Game</h1>
+    <div id="game-container">
+      <div id="ball"></div>
     </div>
-    
-    <script src="main.js"></script>
+    <div class="text-center mt-3">
+      <button id="startBtn" class="btn btn-primary">Start Game</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery (for Bootstrap) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Game Script -->
+  <script src="main.js"></script>
 </body>
 </html>
