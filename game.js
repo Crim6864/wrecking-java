@@ -172,8 +172,7 @@ function startGame(difficulty) {
         dy = -4;
     }
 
-    // Initialize game elements and start the game
-    // For example:
+    // Initialize game elements
     resetGame();
     gameStarted = true; // Set game started flag
     update(); // Start the game loop
@@ -181,21 +180,15 @@ function startGame(difficulty) {
 
 // Start Button Event Listener
 document.getElementById('easyButton').addEventListener('click', function() {
-    if (!gameStarted) { // Check if game has not already started
-        startGame('easy');
-    }
+    startGame('easy');
 });
 
 document.getElementById('mediumButton').addEventListener('click', function() {
-    if (!gameStarted) { // Check if game has not already started
-        startGame('medium');
-    }
+    startGame('medium');
 });
 
 document.getElementById('hardButton').addEventListener('click', function() {
-    if (!gameStarted) { // Check if game has not already started
-        startGame('hard');
-    }
+    startGame('hard');
 });
 
 // Reset Game Function
@@ -205,7 +198,6 @@ function resetGame() {
     lives = 3;
     // Reset bricks, paddle, ball positions, etc.
 }
-
 
 // Event Listeners
 document.addEventListener('keydown', keyDownHandler, false);
@@ -247,6 +239,7 @@ function drawPaddle() {
 
 // Update Game
 function update() {
+    if (!gameStarted) return; // Check if the game has started
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawWalls(); // Draw walls
     drawBricks();
@@ -260,7 +253,7 @@ function update() {
     x += dx;
     y += dy;
 
-    if (gameStarted) { // Check if the game has started
-        requestAnimationFrame(update); // Continue the game loop
-    }
+    requestAnimationFrame(update);
 }
+
+update();
