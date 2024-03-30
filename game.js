@@ -100,8 +100,8 @@ window.onload = function () {
 // Collision Detection with Paddle
 function paddleCollisionDetection() {
     // Calculate the center of the ball
-    const ballCenterX = x + ballRadius;
-    const ballCenterY = y + ballRadius;
+    const ballCenterX = x;
+    const ballCenterY = y;
 
     // Calculate the center of the paddle
     const paddleCenterX = paddleX + paddleWidth / 2;
@@ -113,7 +113,7 @@ function paddleCollisionDetection() {
     const distance = Math.sqrt(dx * dx + dy * dy);
 
     // Check if the distance is less than the sum of the ball radius and half the paddle width and height
-    if (distance < ballRadius + paddleWidth / 2 && Math.abs(dy) < paddleHeight / 2) {
+    if (distance < ballRadius + Math.max(paddleWidth, paddleHeight) / 2) {
         // Calculate the angle of reflection based on the collision point
         const reflectionAngle = Math.atan2(dy, dx);
 
@@ -125,8 +125,8 @@ function paddleCollisionDetection() {
         dy = -Math.sin(bounceAngle) * Math.abs(dy);
 
         // Update ball position to avoid sticking
-        x = paddleX + (dx > 0 ? paddleWidth + ballRadius : -ballRadius);
-        y = paddleY - ballRadius;
+        x = paddleCenterX + (dx > 0 ? ballRadius : -ballRadius);
+        y = paddleCenterY + (dy > 0 ? ballRadius : -ballRadius);
 
         // Reverse vertical direction
         dy = -dy;
