@@ -84,6 +84,9 @@ function wallCollisionDetection() {
     if (y + dy < ballRadius) {
         dy = -dy;
     }
+    if (y + dy > canvas.height - ballRadius) {
+        dy = -dy;
+    }
 }
 
 // Update Game
