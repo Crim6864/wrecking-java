@@ -26,6 +26,9 @@ var difficulty; // Stores the selected difficulty
 // Define brick properties based on difficulty levels
 var brickRowCount = 0;
 var brickColumnCount = 0;
+var brickWidth = 75; // Added brick width
+var brickHeight = 20; // Added brick height
+var brickPadding = 10; // Added brick padding
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
@@ -257,3 +260,6 @@ function draw() {
     update();
     requestAnimationFrame(draw);
 }
+
+// Set focus to the canvas when the page loads
+canvas.focus();
