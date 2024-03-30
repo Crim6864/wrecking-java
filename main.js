@@ -64,6 +64,16 @@ canvas.addEventListener("touchstart", touchStartHandler, false);
 canvas.addEventListener("touchend", touchEndHandler, false);
 canvas.addEventListener("touchmove", touchMoveHandler, false);
 
+// Event listeners for difficulty buttons
+document.getElementById("easy").addEventListener("click", function() {
+    startGameWithDelay('easy');
+});
+document.getElementById("medium").addEventListener("click", function() {
+    startGameWithDelay('medium');
+});
+document.getElementById("hard").addEventListener("click", function() {
+    startGameWithDelay('hard');
+});
 
 // Function to start the game with a delay
 function startGameWithDelay(selectedDifficulty) {
@@ -88,42 +98,6 @@ function startGame(selectedDifficulty) {
     gameStarted = true;
     draw();
 }
-
-// Event listeners for difficulty buttons
-document.getElementById("easy").addEventListener("click", function() {
-    startGameWithDelay('easy');
-});
-document.getElementById("medium").addEventListener("click", function() {
-    startGameWithDelay('medium');
-});
-document.getElementById("hard").addEventListener("click", function() {
-    startGameWithDelay('hard');
-});
-
-// Set focus to the canvas when the page loads
-canvas.focus();
-
-
-// Function to start the game
-function startGame(selectedDifficulty) {
-    difficulty = selectedDifficulty;
-    setDifficulty(difficulty);
-    createBricks();
-    gameStarted = true;
-    canvas.focus(); // Set focus to the canvas
-    draw();
-}
-
-// Event listeners for difficulty buttons
-document.getElementById("easy").addEventListener("click", function() {
-    startGameWithDelay('easy');
-});
-document.getElementById("medium").addEventListener("click", function() {
-    startGameWithDelay('medium');
-});
-document.getElementById("hard").addEventListener("click", function() {
-    startGameWithDelay('hard');
-});
 
 // Functions for paddle control
 function keyDownHandler(e) {
@@ -283,6 +257,3 @@ function draw() {
     update();
     requestAnimationFrame(draw);
 }
-
-// Set focus to the canvas when the page loads
-canvas.focus();
