@@ -64,6 +64,20 @@ canvas.addEventListener("touchstart", touchStartHandler, false);
 canvas.addEventListener("touchend", touchEndHandler, false);
 canvas.addEventListener("touchmove", touchMoveHandler, false);
 
+// Function to start the game with a delay
+function startGameWithDelay(selectedDifficulty) {
+    // Show announcement
+    var announcement = document.createElement("div");
+    announcement.textContent = "Starting game in 5 seconds...";
+    document.body.appendChild(announcement);
+
+    // Delay the start of the game
+    setTimeout(function() {
+        document.body.removeChild(announcement); // Remove announcement
+        startGame(selectedDifficulty); // Start the game
+    }, 5000); // Delay of 5 seconds
+}
+
 // Function to start the game
 function startGame(selectedDifficulty) {
     difficulty = selectedDifficulty;
@@ -73,6 +87,18 @@ function startGame(selectedDifficulty) {
     canvas.focus(); // Set focus to the canvas
     draw();
 }
+
+// Event listeners for difficulty buttons
+document.getElementById("easy").addEventListener("click", function() {
+    startGameWithDelay('easy');
+});
+document.getElementById("medium").addEventListener("click", function() {
+    startGameWithDelay('medium');
+});
+document.getElementById("hard").addEventListener("click", function() {
+    startGameWithDelay('hard');
+});
+
 
 // Functions for paddle control
 function keyDownHandler(e) {
