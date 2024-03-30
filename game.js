@@ -184,10 +184,10 @@ function update() {
     drawLives();
     collisionDetection();
     paddleCollisionDetection();
-    wallCollisionDetection();
     updatePaddlePosition();
     x += dx;
     y += dy;
+    wallCollisionDetection(); // Check for wall collision after updating ball position
 
     requestAnimationFrame(update);
 }
