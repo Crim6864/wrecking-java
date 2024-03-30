@@ -2,8 +2,8 @@ window.onload = function () {
     // Game Constants
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = 800; // Set canvas width
-    canvas.height = 600; // Set canvas height
+    adjustCanvasSize(); // Adjust canvas size for better fit on mobile screens
+
     const ballRadius = 10;
     const paddleHeight = 10;
     const paddleWidth = 75;
@@ -17,7 +17,7 @@ window.onload = function () {
     const brickOffsetLeft = 30;
     let bricks = [];
     let x = canvas.width / 2;
-    let y = canvas.height - 30;
+    let y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
     let dx = 2;
     let dy = -2;
     let paddleX = (canvas.width - paddleWidth) / 2;
@@ -201,6 +201,25 @@ window.onload = function () {
         }
     }
 
+    // Adjust canvas size for better fit on mobile screens
+    function adjustCanvasSize() {
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+        const aspectRatio = canvas.width / canvas.height;
+        const targetWidth = Math.min(screenWidth, 800); // Maximum width of 800
+        const targetHeight = Math.min(screenHeight, 600); // Maximum height of 600
+
+        if (targetWidth / targetHeight > aspectRatio) {
+            // Fit canvas width to screen width
+            canvas.width = targetHeight * aspectRatio;
+            canvas.height = targetHeight;
+        } else {
+            // Fit canvas height to screen height
+            canvas.width = targetWidth;
+            canvas.height = targetWidth / aspectRatio;
+        }
+    }
+
     // Event Listeners for Touch Controls
     canvas.addEventListener('touchstart', touchStartHandler, false);
     canvas.addEventListener('touchmove', touchMoveHandler, false);
@@ -283,13 +302,13 @@ window.onload = function () {
         startGame('hard');
     });
 
-// Reset Game Function
-function resetGame() {
-    lives = 3;
-    x = canvas.width / 2;
-    y = canvas.height - 30 - ballRadius; // Adjusted initial position for the ball
-    paddleX = (canvas.width - paddleWidth) / 2;
-}
+    // Reset Game Function
+    function resetGame() {
+        lives = 3;
+        x = canvas.width / 2;
+        y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
+        paddleX = (canvas.width - paddleWidth) / 2;
+    }
 
     // Event Listeners for Keyboard Controls
     document.addEventListener('keydown', keyDownHandler, false);
