@@ -57,12 +57,34 @@ function createBricks() {
     }
 }
 
-// Event listeners for paddle control
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-canvas.addEventListener("touchstart", touchStartHandler, false);
-canvas.addEventListener("touchend", touchEndHandler, false);
-canvas.addEventListener("touchmove", touchMoveHandler, false);
+// Functions for touch control
+function touchStartHandler(e) {
+    e.preventDefault();
+    var touch = e.touches[0];
+    if (touch.pageX > canvas.width / 2) {
+        rightPressed = true;
+    } else {
+        leftPressed = true;
+    }
+}
+
+function touchEndHandler(e) {
+    e.preventDefault();
+    rightPressed = false;
+    leftPressed = false;
+}
+
+function touchMoveHandler(e) {
+    e.preventDefault();
+    var touch = e.touches[0];
+    if (touch.pageX > canvas.width / 2) {
+        rightPressed = true;
+        leftPressed = false;
+    } else {
+        leftPressed = true;
+        rightPressed = false;
+    }
+}
 
 
 // Function to start the game with a delay
