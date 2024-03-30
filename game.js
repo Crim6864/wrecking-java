@@ -107,40 +107,30 @@ function drawLives() {
 
 // Draw Walls
 function drawWalls() {
-    ctx.beginPath();
+    ctx.lineWidth = 5; // Thickness for walls
+    ctx.strokeStyle = '#0095DD'; // Color for walls
     
     // Top wall
+    ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(canvas.width, 0);
-    ctx.lineWidth = 5; // Thickness for top wall
-    ctx.strokeStyle = '#0095DD'; // Color for top wall
     ctx.stroke();
     
     // Right wall
-    ctx.beginPath();
     ctx.moveTo(canvas.width, 0);
     ctx.lineTo(canvas.width, canvas.height);
-    ctx.lineWidth = 5; // Thickness for right wall
-    ctx.strokeStyle = '#0095DD'; // Color for right wall
     ctx.stroke();
     
     // Bottom wall
-    ctx.beginPath();
     ctx.moveTo(canvas.width, canvas.height);
     ctx.lineTo(0, canvas.height);
-    ctx.lineWidth = 5; // Thickness for bottom wall
-    ctx.strokeStyle = '#0095DD'; // Color for bottom wall
     ctx.stroke();
     
     // Left wall
-    ctx.beginPath();
     ctx.moveTo(0, canvas.height);
     ctx.lineTo(0, 0);
-    ctx.lineWidth = 5; // Thickness for left wall
-    ctx.strokeStyle = '#0095DD'; // Color for left wall
     ctx.stroke();
 }
-
 
 
 
