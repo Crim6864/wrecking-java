@@ -23,10 +23,12 @@ let lives = 3; // Number of lives
 let gameStarted = false; // Flag to check if the game has started
 
 // Initialize Bricks
-for (let c = 0; c < brickColumnCount; c++) {
-    bricks[c] = [];
-    for (let r = 0; r < brickRowCount; r++) {
-        bricks[c][r] = { x: 0, y: 0, status: 1 }; // status 1 means the brick is active
+function initBricks() {
+    for (let c = 0; c < brickColumnCount; c++) {
+        bricks[c] = [];
+        for (let r = 0; r < brickRowCount; r++) {
+            bricks[c][r] = { x: 0, y: 0, status: 1 }; // status 1 means the brick is active
+        }
     }
 }
 
@@ -154,28 +156,22 @@ function updatePaddlePosition() {
 
 // Function to start the game
 function startGame(difficulty) {
-    // Set game parameters based on difficulty
+    // Initialize bricks based on difficulty
     if (difficulty === 'easy') {
-        // Set parameters for easy difficulty
-        // For example:
-        dx = 2;
-        dy = -2;
+        brickRowCount = 3;
+        initBricks();
     } else if (difficulty === 'medium') {
-        // Set parameters for medium difficulty
-        // For example:
-        dx = 3;
-        dy = -3;
+        brickRowCount = 4;
+        initBricks();
     } else if (difficulty === 'hard') {
-        // Set parameters for hard difficulty
-        // For example:
-        dx = 4;
-        dy = -4;
+        brickRowCount = 5;
+        initBricks();
     }
 
     // Initialize game elements
     resetGame();
-    gameStarted = true; // Set game started flag
-    update(); // Start the game loop
+    gameStarted = true;
+    update();
 }
 
 // Start Button Event Listener
@@ -193,10 +189,10 @@ document.getElementById('hardButton').addEventListener('click', function() {
 
 // Reset Game Function
 function resetGame() {
-    // Reset game elements to initial state
-    // For example:
     lives = 3;
-    // Reset bricks, paddle, ball positions, etc.
+    x = canvas.width / 2;
+    y = canvas.height - 30;
+    paddleX = (canvas.width - paddleWidth) / 2;
 }
 
 // Event Listeners
@@ -239,9 +235,9 @@ function drawPaddle() {
 
 // Update Game
 function update() {
-    if (!gameStarted) return; // Check if the game has started
+    if (!gameStarted) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawWalls(); // Draw walls
+    drawWalls();
     drawBricks();
     drawBall();
     drawPaddle();
