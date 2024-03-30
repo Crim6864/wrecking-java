@@ -170,15 +170,29 @@ function paddleCollisionDetection() {
         ctx.stroke();
     }
 
-    // Wall Collision Detection
-    function wallCollisionDetection() {
-        if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-            dx = -dx; // Reverse horizontal direction if hitting left or right wall
-        }
-        if (y + dy < ballRadius) {
-            dy = -dy; // Reverse vertical direction if hitting top wall
+// Wall Collision Detection
+function wallCollisionDetection() {
+    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+        dx = -dx; // Reverse horizontal direction if hitting left or right wall
+    }
+    if (y + dy < ballRadius) {
+        dy = -dy; // Reverse vertical direction if hitting top wall
+    } else if (y + dy > canvas.height - ballRadius) { // Added condition for bottom wall
+        lives--; // Lose a life when hitting the bottom wall
+        if (!lives) {
+            // No more lives, game over
+            alert('Game Over');
+            document.location.reload();
+        } else {
+            // Reset ball position and continue game
+            x = canvas.width / 2;
+            y = canvas.height - paddleOffsetBottom - ballRadius - paddleHeight; // Adjusted position
+            dx = 2;
+            dy = -2;
+            paddleX = (canvas.width - paddleWidth) / 2;
         }
     }
+}
 
     // Update Paddle Position
     function updatePaddlePosition() {
