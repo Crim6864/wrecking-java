@@ -4,6 +4,7 @@ const ctx = canvas.getContext('2d');
 const ballRadius = 10;
 const paddleHeight = 10;
 const paddleWidth = 75;
+const paddleOffsetBottom = 30; // Adjust this value to set the distance from the bottom
 let brickRowCount = 5; // Variable to hold the number of rows of bricks
 const brickColumnCount = 8;
 const brickWidth = 75;
@@ -17,10 +18,12 @@ let y = canvas.height - 30;
 let dx = 2;
 let dy = -2;
 let paddleX = (canvas.width - paddleWidth) / 2;
+let paddleY = canvas.height - paddleHeight - paddleOffsetBottom; // Adjusted paddle position
 let rightPressed = false;
 let leftPressed = false;
 let lives = 3; // Number of lives
 let gameStarted = false; // Flag to check if the game has started
+let bricksDestroyed = 0; // Counter for destroyed bricks
 
 // Initialize Bricks
 function initBricks() {
@@ -30,6 +33,7 @@ function initBricks() {
             bricks[c][r] = { x: 0, y: 0, status: 1 }; // status 1 means the brick is active
         }
     }
+    bricksDestroyed = 0; // Reset bricksDestroyed counter
 }
 
 // Draw Bricks
@@ -60,6 +64,12 @@ function collisionDetection() {
                 if (x > brick.x && x < brick.x + brickWidth && y > brick.y && y < brick.y + brickHeight) {
                     dy = -dy;
                     brick.status = 0; // Set brick status to 0, meaning it's destroyed
+                    bricksDestroyed++; // Increment bricksDestroyed counter
+                    if (bricksDestroyed === brickRowCount * brickColumnCount) {
+                        // All bricks destroyed, trigger win condition
+                        alert('Congratulations! You Win!');
+                        document.location.reload();
+                    }
                 }
             }
         }
@@ -68,35 +78,25 @@ function collisionDetection() {
 
 // Collision Detection with Paddle
 function paddleCollisionDetection() {
-    if (y + dy > canvas.height - ballRadius - paddleHeight) {
-        // Check if hitting bottom wall
+    if (y + dy > paddleY - ballRadius && y + dy < paddleY + paddleHeight + ballRadius) {
+        // Check if hitting the paddle region
         if (x > paddleX && x < paddleX + paddleWidth) {
-            // Check if ball hits the top edge of the paddle
-            if (y + dy < canvas.height - paddleHeight + ballRadius) {
-                dy = -dy; // Reverse vertical direction if hitting top edge of paddle
-            } else {
-                // Calculate the angle of the bounce based on where the ball hits the paddle
-                const collidePoint = x - (paddleX + paddleWidth / 2);
-                const normalizedCollidePoint = collidePoint / (paddleWidth / 2);
-                const bounceAngle = normalizedCollidePoint * Math.PI / 3; // Adjust the bounce angle as needed
-                dx = ballRadius * Math.sin(bounceAngle);
-                dy = -ballRadius * Math.cos(bounceAngle);
-            }
+            dy = -dy; // Reverse vertical direction
+        }
+    } else if (y + dy > canvas.height - ballRadius) {
+        // Ball misses the paddle, lose a life
+        lives--;
+        if (!lives) {
+            // No more lives, game over
+            alert('Game Over');
+            document.location.reload();
         } else {
-            // Ball misses the paddle, lose a life
-            lives--;
-            if (!lives) {
-                // No more lives, game over
-                alert('Game Over');
-                document.location.reload();
-            } else {
-                // Reset ball position and continue game
-                x = canvas.width / 2;
-                y = canvas.height - 30;
-                dx = 2;
-                dy = -2;
-                paddleX = (canvas.width - paddleWidth) / 2;
-            }
+            // Reset ball position and continue game
+            x = canvas.width / 2;
+            y = canvas.height - 30;
+            dx = 2;
+            dy = -2;
+            paddleX = (canvas.width - paddleWidth) / 2;
         }
     }
 }
@@ -248,6 +248,7 @@ function resetGame() {
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
+// Key Down Handler
 function keyDownHandler(e) {
     if (e.key === 'Right' || e.key === 'ArrowRight') {
         rightPressed = true;
@@ -256,30 +257,13 @@ function keyDownHandler(e) {
     }
 }
 
+// Key Up Handler
 function keyUpHandler(e) {
     if (e.key === 'Right' || e.key === 'ArrowRight') {
         rightPressed = false;
     } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
         leftPressed = false;
     }
-}
-
-// Draw Ball
-function drawBall() {
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#0095DD';
-    ctx.fill();
-    ctx.closePath();
-}
-
-// Draw Paddle
-function drawPaddle() {
-    ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = '#0095DD';
-    ctx.fill();
-    ctx.closePath();
 }
 
 // Update Game Loop
